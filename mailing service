@@ -1,0 +1,21 @@
+public class MailingService {
+
+    public static void sendMail(
+        String recipient,
+        String subject,
+        String message
+    ) {
+        Messaging.SingleEmailMessage mail =
+            new Messaging.SingleEmailMessage();
+
+        mail.setToAddresses(new String[] { recipient });
+
+        mail.setSubject(subject);
+
+        mail.setPlainTextBody(message);
+
+        Messaging.sendEmail(
+            new Messaging.SingleEmailMessage[] { mail }
+        );
+    }
+}
