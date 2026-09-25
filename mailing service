@@ -19,3 +19,17 @@ public class MailingService {
         );
     }
 }
+
+
+
+
+
+
+
+
+String recipientEmail = 'sushanrai075@gmail.com';
+String emailSubject = 'Test Email from Apex';
+String emailBody = 'Hello, this is a test email sent using the MailingService class!';
+
+// Call the static method
+MailingService.sendMail(recipientEmail, emailSubject, emailBody);
