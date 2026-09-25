@@ -1,0 +1,40 @@
+ssh -i yourkey.pem ubuntu@<Public-IP>
+
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt install apache2 -y
+sudo systemctl enable --now apache2
+
+sudo apt install php libapache2-mod-php php-mysql -y
+sudo systemctl restart apache2
+
+echo '<?php phpinfo(); ?>' > /var/www/html/info.php
+
+sudo apt install mysql-server -y
+sudo systemctl enable --now mysql
+
+
+CREATE DATABASE college;
+
+USE college;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    course VARCHAR(50)
+);
+
+INSERT INTO students (name, course)
+VALUES ('Anu', 'ISE'), ('Rahul', 'ECE');
+
+CREATE USER 'phpuser'@'localhost'
+IDENTIFIED BY 'password@123';
+
+GRANT ALL PRIVILEGES ON college.* TO 'phpuser'@'localhost';
+
+FLUSH PRIVILEGES;
+
+http://<Public-IP>
+http://<Public-IP>/info.php
+http://<Public-IP>/db.php
