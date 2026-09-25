@@ -1,0 +1,301 @@
+
+Sushan Rai <sushanrai075@gmail.com>
+13:02 (3 minutes ago)
+to me
+
+Yes. I cleaned up the handwritten steps and corrected the commands so you can follow them directly on Windows.
+
+Google App Engine – Deploy a Flask App
+
+Part 1 — Install Google Cloud CLI
+
+Step 1: Install Google Cloud CLI
+
+Install Google Cloud CLI on your computer.
+
+After installation, open Command Prompt / PowerShell and check:
+
+gcloud --version
+
+Step 2: Login
+
+gcloud auth login
+
+A browser will open → sign in with your Google account.
+
+
+---
+
+Part 2 — Create the Flask Application
+
+Step 3: Create a project folder
+
+mkdir my-app
+cd my-app
+
+Step 4: Create main.py
+
+Create a file named:
+
+main.py
+
+Put this code inside:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello from Google App Engine!"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
+
+
+---
+
+Step 5: Create requirements.txt
+
+Create:
+
+requirements.txt
+
+Put:
+
+Flask
+
+
+---
+
+Part 3 — Create Virtual Environment
+
+Step 6: Create virtual environment
+
+On Windows:
+
+python -m venv venv
+
+Step 7: Activate it
+
+venv\Scripts\activate
+
+You should see something like:
+
+(venv) C:\...\my-app>
+
+Step 8: Install Flask
+
+pip install Flask
+
+Or install everything from requirements:
+
+pip install -r requirements.txt
+
+
+---
+
+Part 4 — Test the Application Locally
+
+Step 9: Run the Flask application
+
+python main.py
+
+You should see something similar to:
+
+Running on http://127.0.0.1:8080
+
+Open your browser and go to:
+
+http://127.0.0.1:8080
+
+You should see:
+
+Hello from Google App Engine!
+
+
+---
+
+Part 5 — Create Google App Engine Configuration
+
+Step 10: Create app.yaml
+
+Inside the same folder, create:
+
+app.yaml
+
+Put:
+
+runtime: python312
+
+So your folder should look like:
+
+my-app/
+│
+├── main.py
+├── requirements.txt
+├── app.yaml
+└── venv/
+
+
+---
+
+Part 6 — Configure Google Cloud
+
+Step 11: Login
+
+If you haven't already:
+
+gcloud auth login
+
+Step 12: Initialize Google Cloud
+
+gcloud init
+
+Choose your Google account and then select an existing Google Cloud project or create a new one.
+
+You can check the currently selected project with:
+
+gcloud config get-value project
+
+
+---
+
+Part 7 — Create App Engine Application
+
+If App Engine has not been initialized for your project, run:
+
+gcloud app create
+
+It will ask you to select a region.
+
+Choose the region required for your lab/project.
+
+> Important: The App Engine region generally can't be changed later for that project.
+
+
+
+
+---
+
+Part 8 — Deploy the Application 🚀
+
+Make sure you are inside the folder containing app.yaml:
+
+cd my-app
+
+Then:
+
+gcloud app deploy
+
+It will ask you to confirm.
+
+Enter:
+
+Y
+
+Google Cloud will upload and deploy your Flask application.
+
+
+---
+
+Part 9 — Open the Deployed Application
+
+After deployment:
+
+gcloud app browse
+
+This opens your deployed application in the browser.
+
+You can also use:
+
+gcloud app browse --project=YOUR_PROJECT_ID
+
+
+---
+
+⭐ All Commands Together
+
+If you just need the commands for your lab exam, memorize these:
+
+gcloud --version
+gcloud auth login
+
+mkdir my-app
+cd my-app
+
+python -m venv venv
+venv\Scripts\activate
+
+pip install Flask
+
+Create main.py, requirements.txt, and app.yaml.
+
+Then:
+
+python main.py
+
+Test:
+
+http://127.0.0.1:8080
+
+Then:
+
+gcloud init
+gcloud config get-value project
+gcloud app create
+gcloud app deploy
+gcloud app browse
+
+Files to remember
+
+main.py
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello from Google App Engine!"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
+
+requirements.txt
+
+Flask
+
+app.yaml
+
+runtime: python312
+
+Simple flow to remember
+
+Install Google Cloud CLI
+        ↓
+gcloud auth login
+        ↓
+Create Flask app
+        ↓
+Create requirements.txt
+        ↓
+Create virtual environment
+        ↓
+Install Flask
+        ↓
+python main.py
+        ↓
+Test localhost:8080
+        ↓
+Create app.yaml
+        ↓
+gcloud init
+        ↓
+gcloud app create
+        ↓
+gcloud app deploy
+        ↓
+gcloud app browse
+
+This is the cleaned-up version of what is written in your two pages, with the commands corrected for a current Python Flask App Engine Standard setup.
